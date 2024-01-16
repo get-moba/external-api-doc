@@ -1,3 +1,6 @@
+> [!NOTE]
+> This API has been last updated on 2024-01-16. To know more about the changes, please refer to the [Changelog](#changelog) section.
+
 # External API v1 Documentation
 
 ## Base URL
@@ -13,6 +16,7 @@ Please contact us at support@get-moba.com to get an API key
 You should be provided with two API Keys, a production one and a sandbox one. Sandbox key gives you access to sample data.
 
 Available sample vins are the following:
+
 - **KMHC851JFLU067181**: Timestamp `1697109652`
 - **VF1AG000X63197572**: Timestamps `1697109050` and `1699790110`
 - **VR3UHZKXZNT097314**: Timestamp `1696422253`
@@ -88,6 +92,8 @@ Content-Type: application/json
       "name": "Renault Zoé 50 kWh R110",
       "pdf_token": "c927fea2fad",
       "pdf_url": "https://certificate.get-moba.com/certificates/c927fea2fad.pdf",
+      "render_url": "https://certificate.get-moba.com/miner/api.php?action=diagFromToken&token=c927fea2fad",
+      "download_url": "https://certificate.get-moba.com/miner/api.php?action=diagFromToken&token=c927fea2fad&download=1",
       "ranges": {
         "highway_cycle_summer": "263 - 291 km",
         "highway_cycle_winter": "216 - 239 km",
@@ -107,3 +113,13 @@ Content-Type: application/json
   "status": 200
 }
 ```
+
+## Changelog
+
+### 2023-11-17
+
+- Initial release
+
+### 2024-01-16
+
+- Added properties `render_url` and `download_url` to `diagnostics` objects
