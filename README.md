@@ -60,6 +60,31 @@ curl -X POST \
 - `start` (int): Start timestamp for filtering diagnostics (optional).
 - `end` (int): End timestamp for filtering diagnostics (optional).
 
+### Reponse JSON
+
+- `datetime` (string): Datetime of the response.
+- `diagnostics` (array): Array of diagnostics objects.
+- `many` (boolean): Whether the response contains multiple diagnostics objects.
+- `n_results` (int): Number of diagnostics objects in the response.
+- `status` (int): HTTP status code of the response.
+
+### Diagnostics Object
+
+- `c0` (float): Battery capacity in unit set with `c0_unit`.
+- `c0_unit` (string): Unit of the battery capacity.
+- `issue_date` (string): Date of the diagnostic.
+- `mileage` (int): Mileage of the vehicle.
+- `name` (string): Name of the vehicle.
+- `pdf_token` (string): Token of the PDF certificate.
+- `pdf_url` (string): URL of the PDF certificate.
+- `render_url` (string): URL of the certificate rendering (Will use default template).
+- `download_url` (string): URL of the certificate download (Will use default template).
+- `ranges` (object): Object containing the ranges of the vehicle.
+- `soc` (float): State of charge of the vehicle.
+- `soh` (float): State of health of the vehicle.
+- `range_unit` (string): Unit of the ranges.
+- `vin` (string): VIN of the vehicle.
+
 ### Headers
 
 - `X-Moba-Api-Key`: API Key for authentication.
