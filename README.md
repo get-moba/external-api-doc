@@ -47,6 +47,23 @@ curl -X POST \
 "https://api-external.app-moba.com/v1/diagnostics/query"
 ```
 
+## Diagnostic URLs
+
+Since version 1.0.1, we have introdused multi format URLs for the diagnostics. You can change template by using querystring of the output render url.
+
+Available formats are the following:
+
+- PDF: Usual PDF certificate. It is the most detailed document.
+  - Url: `https://certificate.get-moba.com/certificates/{token}.pdf`
+  - Alias: `https://certificate.get-moba.com/miner/api.php?action=diagFromToken&token={token}&template=pdf`
+- JPG (800 x 600): Image of the certificate. It is the most compact document and can be embedded on webpages as so.
+  - Url: `https://certificate.get-moba.com/miner/api.php?action=diagFromToken&token={token}&template=jpg_800_600`
+
+By default, it is the template set for your company that will be served. If you want to change this default template, you can contact us.
+
+> [!NOTE]
+> Default template is also the one used when downloading the certificate from the app by the operator.
+
 ## Query Diagnostics
 
 ### Endpoint
@@ -141,10 +158,10 @@ Content-Type: application/json
 
 ## Changelog
 
-### 2023-11-17
+### v1.0.0 - 2023-11-17
 
 - Initial release
 
-### 2024-01-16
+### v1-0-1 - 2024-01-16
 
 - Added properties `render_url` and `download_url` to `diagnostics` objects
