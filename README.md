@@ -49,14 +49,16 @@ curl -X POST \
 
 ## Diagnostic URLs
 
-Since version 1.0.1, we have introdused multi format URLs for the diagnostics. You can change template by using querystring of the output render url.
+Since version 1.0.1, we have introdused multi format URLs for the diagnostics. You can change template by using querystring of the output `render_url`. It can be set with key `template={template_id}`.
 
 Available formats are the following:
 
 - PDF: Usual PDF certificate. It is the most detailed document.
+  - ID: `pdf`
   - Url: `https://certificate.get-moba.com/certificates/{token}.pdf`
   - Alias: `https://certificate.get-moba.com/miner/api.php?action=diagFromToken&token={token}&template=pdf`
 - JPG (800 x 600): Image of the certificate. It is the most compact document and can be embedded on webpages as so.
+  - ID: `jpg_800_600`
   - Url: `https://certificate.get-moba.com/miner/api.php?action=diagFromToken&token={token}&template=jpg_800_600`
 
 By default, it is the template set for your company that will be served. If you want to change this default template, you can contact us.
