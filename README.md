@@ -294,6 +294,27 @@ The payload sent to the webhook URL is a JSON object containing the following ke
 }
 ```
 
+### Responsing to a Webhook
+
+When a webhook is called, the server should respond with a status code of 200 if the payload was received and processed successfully. If the server responds with a status code other than 200, the webhook will be retried later.
+The webhook server has *up to 10 seconds* to respond to the webhook call.
+
+### Webhook Retries
+
+When a webhook fails to be called, it will be retried up to 9 times. After the last failure, the webhook will be disabled and will need to be re-enabled manually.
+
+Retries happend at the following intervals:
+- 1 minute
+- 5 minutes
+- 15 minutes
+- 1 hour
+- 4 hours
+- 1 day
+- 2 days
+- 4 days
+- 1 week
+
+
 
 ## List Webhooks
 
