@@ -209,6 +209,91 @@ X-Moba-Api-Key: moba_...
 }
 ```
 
+## Webhook
+
+Using webhooks allow your company to get real time updates on the diagnostics of your vehicles. You can use them to trigger actions in your systems, like sending an email, updating a database, or sending a message to a chat application.
+
+If you want to access webhooks, you need to contact us at contact@get-moba.com.
+
+### Webhook Signature
+
+Along with the payload, a signature is sent in the HTTP headers of the request under the key `X-Moba-Signature`. This signature is a HMAC-SHA256 hash of the payload using the secret key of the webhook as the key.
+
+To verify the signature, you can use the following code:
+
+#### Python
+
+```python
+import hmac
+import hashlib
+
+def verify_signature(payload, signature, secret):
+    return hmac.compare_digest(
+        signature,
+        hmac.new(
+            secret.encode('utf-8'),
+            payload.encode('utf-8'),
+            hashlib.sha256
+        ).hexdigest()
+    )
+```
+
+#### PHP
+
+```PHP
+function verify_signature($payload, $signature, $secret) {
+    return hash_equals(
+        $signature,
+        hash_hmac('sha256', $payload, $secret)
+    );
+}
+```
+
+#### JavaScript
+
+```javascript
+const crypto = require('crypto');
+
+function verifySignature(payload, signature, secret) {
+    return crypto.createHmac('sha256', secret).update(payload).digest('hex') === signature;
+}
+```
+
+To get the secret of your webhook, you can query `/webhooks` service of the API.
+
+### Webhook Payload
+
+The payload sent to the webhook URL is a JSON object containing the following keys:
+- `datetime` (string): Datetime of the event.
+- `event` (string): Event that triggered the webhook.
+- `data` (object): Object containing the data of the event.
+    - `date` (string): Date of the diagnostic.
+    - `vin` (string): VIN of the vehicle.
+    - `soc` (float): State of charge of the vehicle.
+    - `soh` (float): State of health of the vehicle.
+    - `mileage` (float): Mileage of the vehicle.
+    - `token` (string): Token of the diagnostic.
+    - `more_info_api_url` (string): URL of the API to get more information about the diagnostic.
+- `test` (boolean): Will exist and be true when testing Webhook with the API
+
+### Example Payload
+
+```
+{
+  "datetime": "2024-03-08 15:27:50",
+  "event": "diag_done",
+  "data": {
+    "date": "2024-03-06 17:30:45",
+    "vin": "VF1AG000X63197573",
+    "soc": 97.3,
+    "soh": 74,
+    "mileage": 22453,
+    "token": "c12345abc",
+    "more_info_api_url": "https://api-external.app-moba.com/v1/diagnostics/c12345abc"
+  }
+}
+```
+
 
 ## List Webhooks
 
@@ -304,91 +389,6 @@ GET /v1/webhooks/123/test?token=c927fea2fad HTTP/1.1
     "message": "Webhook called successfully"
   },
   "status": 200
-}
-```
-
-# Webhook
-
-Using webhooks allow your company to get real time updates on the diagnostics of your vehicles. You can use them to trigger actions in your systems, like sending an email, updating a database, or sending a message to a chat application.
-
-If you want to access webhooks, you need to contact us at contact@get-moba.com.
-
-## Webhook Signature
-
-Along with the payload, a signature is sent in the HTTP headers of the request under the key `X-Moba-Signature`. This signature is a HMAC-SHA256 hash of the payload using the secret key of the webhook as the key.
-
-To verify the signature, you can use the following code:
-
-#### Python
-
-```python
-import hmac
-import hashlib
-
-def verify_signature(payload, signature, secret):
-    return hmac.compare_digest(
-        signature,
-        hmac.new(
-            secret.encode('utf-8'),
-            payload.encode('utf-8'),
-            hashlib.sha256
-        ).hexdigest()
-    )
-```
-
-#### PHP
-
-```PHP
-function verify_signature($payload, $signature, $secret) {
-    return hash_equals(
-        $signature,
-        hash_hmac('sha256', $payload, $secret)
-    );
-}
-```
-
-#### JavaScript
-
-```javascript
-const crypto = require('crypto');
-
-function verifySignature(payload, signature, secret) {
-    return crypto.createHmac('sha256', secret).update(payload).digest('hex') === signature;
-}
-```
-
-To get the secret of your webhook, you can query `/webhooks` service of the API.
-
-## Webhook Payload
-
-The payload sent to the webhook URL is a JSON object containing the following keys:
-- `datetime` (string): Datetime of the event.
-- `event` (string): Event that triggered the webhook.
-- `data` (object): Object containing the data of the event.
-    - `date` (string): Date of the diagnostic.
-    - `vin` (string): VIN of the vehicle.
-    - `soc` (float): State of charge of the vehicle.
-    - `soh` (float): State of health of the vehicle.
-    - `mileage` (float): Mileage of the vehicle.
-    - `token` (string): Token of the diagnostic.
-    - `more_info_api_url` (string): URL of the API to get more information about the diagnostic.
-- `test` (boolean): Will exist and be true when testing Webhook with the API
-
-## Example Payload
-
-```
-{
-  "datetime": "2024-03-08 15:27:50",
-  "event": "diag_done",
-  "data": {
-    "date": "2024-03-06 17:30:45",
-    "vin": "VF1AG000X63197573",
-    "soc": 97.3,
-    "soh": 74,
-    "mileage": 22453,
-    "token": "c12345abc",
-    "more_info_api_url": "https://api-external.app-moba.com/v1/diagnostics/c12345abc"
-  }
 }
 ```
 
