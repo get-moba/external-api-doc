@@ -259,10 +259,10 @@ X-Moba-Api-Key: moba_...
       "level": "entity",
       "level_id": 1,
       "n_retries": 3,
-      "name": "N8N - Test",
-      "secret": "77e83fb167ad8bf912c5ebb660b8466b",
+      "name": "Webhook Name",
+      "secret": "123456789abcdef",
       "updated_at": "2024-03-08 15:29:09",
-      "url": "https://n8n.app-moba.com/webhook-test/60e3917d-535a-48e6-8c44-1363681affc8"
+      "url": "https://my-webhook-url.com"
     }
   ],
   "many": true,
@@ -382,12 +382,12 @@ The payload sent to the webhook URL is a JSON object containing the following ke
   "event": "diag_done",
   "data": {
     "date": "2024-03-06 17:30:45",
-    "vin": "UU1DBG005LU004318",
+    "vin": "VF1AG000X63197573",
     "soc": 97.3,
     "soh": 74,
-    "mileage": 22453.91,
-    "token": "c1f235bdbe7",
-    "more_info_api_url": "https://api-external.app-moba.com/v1/diagnostics/c1f235bdbe7"
+    "mileage": 22453,
+    "token": "c12345abc",
+    "more_info_api_url": "https://api-external.app-moba.com/v1/diagnostics/c12345abc"
   }
 }
 ```
