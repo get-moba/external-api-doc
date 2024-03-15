@@ -278,7 +278,7 @@ The payload sent to the webhook URL is a JSON object containing the following ke
 
 ### Example Payload
 
-```
+```json
 {
   "datetime": "2024-03-08 15:27:50",
   "event": "diag_done",
