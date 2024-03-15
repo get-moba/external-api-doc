@@ -413,17 +413,99 @@ GET /v1/webhooks/123/test?token=c927fea2fad HTTP/1.1
 }
 ```
 
+## Activate Webhook
+
+Activates a webhook.
+
+### Endpoint
+
+- **URL**: `/v1/webhooks/<webhook_id>/activate`
+- **Method**: `GET`
+
+### Sample Request
+
+```http
+GET /v1/webhooks/123/activate HTTP/1.1
+```
+
+### Sample Response
+
+```json
+{
+  "datetime": "2023-11-17T14:50:47.042441",
+  "webhook": {
+    "active": true,
+    "created_at": "2024-03-08 10:53:27",
+    "entity_id": 1234,
+    "event": "diag_done",
+    "id": 123,
+    "last_used": "2024-03-08 15:29:09",
+    "level": "entity",
+    "level_id": 1,
+    "n_retries": 3,
+    "name": "Webhook Name",
+    "secret": "123456789abcdef",
+    "updated_at": "2024-03-08 15:29:09",
+    "url": "https://my-webhook-url.com"
+  },
+  "status": 200
+}
+```
+
+## Deactivate Webhook
+
+Deactivates a webhook.
+
+### Endpoint
+
+- **URL**: `/v1/webhooks/<webhook_id>/deactivate`
+- **Method**: `GET`
+
+### Sample Request
+
+```http
+GET /v1/webhooks/123/deactivate HTTP/1.1
+```
+### Sample Response
+
+```json
+{
+  "datetime": "2023-11-17T14:50:47.042441",
+  "webhook": {
+    "active": false,
+    "created_at": "2024-03-08 10:53:27",
+    "entity_id": 1234,
+    "event": "diag_done",
+    "id": 123,
+    "last_used": "2024-03-08 15:29:09",
+    "level": "entity",
+    "level_id": 1,
+    "n_retries": 3,
+    "name": "Webhook Name",
+    "secret": "123456789abcdef",
+    "updated_at": "2024-03-08 15:29:09",
+    "url": "https://my-webhook-url.com"
+  },
+  "status": 200
+}
+```
+
+
 ## Changelog
 
 ### v1.0.0 - 2023-11-17
 
 - Initial release
 
-### v1-0-1 - 2024-01-16
+### v1.0.1 - 2024-01-16
 
 - Added properties `render_url` and `download_url` to `diagnostics` objects
 
-### v1-0-2 - 2024-03-13
+### v1.0.2 - 2024-03-13
 
 - Added `test` key to the payload of the webhook
 - Added webhook integration
+
+### v1.0.3 - 2024-03-15
+
+- Added ways to activate and deactivate webhooks
